@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Là où mon cœur t’a reconnue</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+@property --h{syntax:'<number>';inherits:true;initial-value:340}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--ink:#3b2f2a;--gold:#8a4a44}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:#efe5d0;color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;overflow:hidden}
+#bg{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 25%,#faf5e8 0%,#f1e8d3 60%,#e6d9bd 100%)}
+#p{display:none}
+#p span{position:fixed;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:0;animation:up linear infinite}
+@keyframes up{0%{opacity:0;transform:translateY(0)}15%{opacity:.5}100%{opacity:0;transform:translateY(-105vh)}}
+#s{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);bottom:calc(76px + env(safe-area-inset-bottom,0px));overflow-y:auto;display:flex;flex-direction:column;padding:28px 28px 12px;text-align:center;transition:opacity .35s}
+#s>div{margin:auto;max-width:24em}
+#s h2{margin:0 0 1.2em;font-weight:500;font-size:clamp(30px,8vw,46px);color:var(--gold)}
+#s p{margin:0 0 1.5em;font-style:italic;font-weight:300;font-size:clamp(21px,5.2vw,28px);line-height:1.45}
+#s p.big{font-size:clamp(44px,12vw,72px);color:var(--gold)}
+#s button{font:inherit;font-size:22px;font-style:italic;color:var(--ink);background:none;border:1px solid var(--gold);border-radius:99px;padding:.5em 1.6em;margin-top:1em}
+#s small{display:block;margin-top:1.4em;opacity:.6;font-style:italic}
+#s small.sg{position:fixed;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:0;font-size:13px;opacity:.28}
+#n{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px));font-style:italic;font-size:18px;opacity:.9}
+#n button{font:inherit;font-size:34px;line-height:1;color:var(--gold);background:none;border:0;width:64px;height:56px}
+#n button:focus-visible,#s button:focus-visible{outline:2px solid var(--gold)}
+@media (prefers-reduced-motion:reduce){#p{display:none}}
+</style></head>
+<body>
+<div id="bg"></div><div id="p"></div><div id="s"></div>
+<div id="n"><button id="pv" aria-label="Page précédente">‹</button><span id="c"></span><button id="nx" aria-label="Page suivante">›</button></div>
+<script>
+const C=[
+["L’inattendu",`Je ne t’attendais pas.
+
+Je ne savais même pas
+qu’une rencontre pouvait bouleverser
+l’ordre tranquille d’une vie.
+
+Puis tu es apparue
+presque par hasard
+et quelque chose en moi
+s’est mis à te reconnaître.
+
+Avant même de comprendre pourquoi
+j’avais déjà envie de connaître
+ton sourire
+tes silences
+tes pensées
+tout ce qui faisait de toi
+la femme que tu es.
+
+Il y a des rencontres
+qui passent dans une existence.
+
+Et puis il y a celles
+qui y laissent une empreinte.
+
+Toi
+tu as laissé la tienne.`],
+["Ton regard",`Il y avait ton regard.
+
+Je pourrais essayer
+de trouver les mots les plus justes
+pour le décrire
+mais aucun ne suffirait.
+
+Dans tes yeux
+j’ai découvert quelque chose
+qui me désarmait.
+
+Une douceur
+une profondeur
+quelque chose d’inexplicable
+qui me donnait envie
+de rester encore un peu.
+
+Alors je cherchais ton regard
+sans même m’en apercevoir.
+
+Et lorsque nos yeux se trouvaient
+le reste pouvait bien disparaître.
+
+Il n’y avait plus que toi.`],
+["Le bouleversement",`Je pensais savoir
+ce que signifiait s’attacher à quelqu’un.
+
+Puis je t’ai rencontrée.
+
+Et j’ai compris
+qu’il existait une différence
+entre apprécier une présence
+et ressentir son absence
+avant même qu’elle ne survienne.
+
+Tu as doucement déplacé quelque chose en moi.
+
+Tu as fait tomber
+des barrières dont j’avais oublié l’existence.
+
+Et sans bruit
+sans promesse
+sans que je puisse m’en défendre
+tu as trouvé le chemin
+jusqu’à mon cœur.`],
+["Nos fragments",`Je pourrais oublier certaines journées.
+
+Mais jamais
+je n’oublierai ces petits fragments de nous.
+
+Un sourire échangé.
+
+Une phrase qui reste.
+
+Un regard qui s’attarde.
+
+Un rire.
+
+Une main qui cherche l’autre.
+
+Un instant volé au milieu
+d’une journée ordinaire
+qui soudain devient précieux.
+
+C’est peut-être cela
+que j’aime le plus dans notre histoire.
+
+Elle s’est construite
+avec des choses minuscules
+qui sont devenues immenses
+simplement parce qu’elles étaient avec toi.`],
+["Tes bras",`Il y a eu un moment
+où la distance entre nous
+n’existait plus.
+
+Tes bras autour de moi.
+
+Ton souffle.
+
+Ta présence.
+
+Et cette étrange impression
+que le temps lui-même
+avait cessé d’avancer.
+
+Je ne pensais plus à demain.
+
+Je ne cherchais plus à comprendre.
+
+Je voulais seulement
+rester là.
+
+Contre toi.
+
+Parce qu’il existe des endroits
+où l’on se sent chez soi
+sans jamais y avoir vécu.
+
+Pour moi
+cet endroit
+c’est toi.`],
+["Ce que tu m’as donné",`Tu ne m’as pas seulement donné
+des souvenirs.
+
+Tu m’as donné une autre manière
+de regarder certaines choses.
+
+Tu m’as offert de la tendresse
+là où je ne l’attendais plus.
+
+Tu m’as offert cette sensation rare
+d’être compris
+sans avoir besoin de tout expliquer.
+
+Et surtout
+tu m’as permis d’être simplement moi.
+
+Je crois que c’est l’un des plus beaux cadeaux
+qu’une personne puisse faire à une autre.`],
+["La douceur de toi",`Tu me dis parfois
+que j’ai un grand cœur.
+
+Mais si seulement tu pouvais
+te voir comme je te vois.
+
+Tu comprendrais que cette immense douceur
+dont tu parles chez moi
+vient aussi beaucoup de toi.
+
+Tu es d’une bonté
+que tu ne mesures probablement pas.
+
+Tu prends soin.
+
+Tu rassures.
+
+Tu donnes.
+
+Tu aimes avec une sincérité
+qui me bouleverse.
+
+Et je crois que c’est aussi pour cela
+que je t’aime autant.
+
+Parce que derrière ton sourire
+j’ai découvert une âme
+d’une beauté rare.`],
+["Le manque",`Depuis que tu es loin
+j’ai compris quelque chose.
+
+Le manque n’est pas seulement
+l’absence d’une personne.
+
+C’est l’absence
+de tout ce qu’elle faisait naître en nous.
+
+Ta voix me manque.
+
+Ton regard me manque.
+
+Tes bras me manquent.
+
+Mais ce qui me manque surtout
+c’est cette version de moi
+qui existe lorsque tu es là.
+
+Celle qui sourit sans raison.
+
+Celle qui oublie le temps.
+
+Celle qui se sent simplement bien
+parce que toi
+tu es là.`],
+["Je t’aime",`Je pourrais écrire
+des centaines de pages
+pour essayer de t’expliquer
+ce que je ressens.
+
+Je pourrais chercher
+les mots les plus précieux
+de notre langue.
+
+Je pourrais parler d’éternité
+de destinée
+de vertige
+de tendresse
+de passion.
+
+Mais au fond
+il reste une vérité
+beaucoup plus simple.
+
+Je t’aime.
+
+Et derrière ces trois mots
+il y a tout ce que je ne sais pas dire.
+
+Tout ce que je ressens
+lorsque je te regarde.
+
+Tout ce que je ressens
+lorsque tu me manques.
+
+Tout ce que mon cœur éprouve
+lorsque tu me dis que tu m’aimes.`],
+["Ce que je souhaite",`Je ne veux pas seulement
+être un souvenir heureux dans ta vie.
+
+J’aimerais être
+celui auprès de qui
+tu connaîtras encore
+des milliers de sourires.
+
+Celui avec qui
+tu connaîtras les matins tranquilles
+les soirées interminables
+les voyages improvisés
+les projets
+les éclats de rire
+et tous ces petits riens
+qui finissent par constituer une vie.
+
+J’aimerais pouvoir un jour
+te rendre tout ce que tu m’as donné.
+
+Pas en paroles.
+
+Mais en étant là.
+
+Chaque fois que tu auras besoin de moi.`],
+["Si la vie nous laisse",`Je ne sais pas
+ce que la vie décidera pour nous.
+
+Je ne veux pas lui arracher ses réponses.
+
+Mais quelque part en moi
+il existe un espoir
+que je n’arrive pas à faire taire.
+
+Celui qu’un jour
+le temps nous offrira enfin
+l’espace nécessaire
+pour vivre ce que nos cœurs
+ont déjà compris.
+
+Et si ce jour arrive
+je ne chercherai pas à savoir
+combien de temps nous avons perdu.
+
+Je regarderai simplement tes yeux
+et je serai heureux
+de t’avoir retrouvée.`],
+["Ce que je n’ai jamais su te dire",`Il y a tant de choses
+que je n’ai jamais su te dire.
+
+Pas parce que je ne les ressens pas
+mais parce que certains sentiments
+semblent trop grands pour entrer dans des mots.
+
+Je voudrais que tu saches
+que derrière chacun de mes regards
+il y avait quelque chose que je n’osais pas toujours dire.
+
+Derrière chacun de mes sourires
+il y avait le bonheur de t’avoir près de moi.
+
+Et derrière chaque silence
+il y avait parfois tout ce que mon cœur
+n’arrivait pas à prononcer.
+
+Tu es devenue précieuse
+d’une manière que je n’aurais jamais imaginée.
+
+Et si je pouvais te laisser une seule certitude
+ce serait celle-ci
+
+quoi que la vie fasse de notre histoire
+elle ne pourra jamais effacer
+ce que tu as fait naître en moi.`],
+["La dernière page",`Et si je devais garder
+une seule image de nous
+pour toute une vie
+
+je choisirais peut-être
+celle de tes bras autour de moi.
+
+Parce qu’à cet instant
+je n’avais besoin de rien.
+
+Ni de réponses.
+
+Ni de promesses.
+
+Ni de savoir ce que demain ferait de nous.
+
+J’étais simplement là
+contre toi.
+
+Et mon cœur
+pour la première fois depuis longtemps
+n’avait plus rien à chercher.
+
+Il t’avait trouvée.
+
+Alors si un jour
+la vie nous éloigne encore
+
+souviens-toi seulement de ça :
+
+je t’aurai aimée avec une profondeur
+que le temps ne saura pas effacer.
+
+Et quelque part en moi
+dans cet endroit que personne
+ne pourra jamais atteindre
+
+il y aura toujours
+
+!toi.`]
+];
+const N=C.length,s=document.getElementById('s'),bg=document.getElementById('bg'),nav=document.getElementById('n'),cnt=document.getElementById('c');
+let i=0;
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+function go(n){i=Math.max(0,Math.min(N+1,n));s.style.opacity=0;setTimeout(render,300)}
+function render(){const w=el('div');s.innerHTML='';s.scrollTop=0;
+ nav.style.visibility=i===0?'hidden':'visible';cnt.textContent=i===N?'13/07/27 toi + moi':i>0&&i<N?i+' / '+N:'';
+ if(i===0){w.append(el('h2','','Là où mon cœur t’a reconnue'),el('p','','J’espère que cela te donnera le sourire'),el('p','','— à jamais toi'));
+  const b=el('button','','Commencer');b.onclick=()=>go(1);w.append(b);w.append(el('small','sg','Allan'));bg.style.setProperty('--h',340)}
+ else if(i>N){w.append(el('h2','','Pour toi, Camilia.'));
+  const b=el('button','','Relire depuis le début');b.onclick=()=>go(0);w.append(b);bg.style.setProperty('--h',350)}
+ else{const [t,body]=C[i-1];bg.style.setProperty('--h',345+12*Math.sin(i*0.8));
+  body.split('\n\n').forEach(x=>{const p=el('p',x.startsWith('!')?'big':'');
+   x.replace(/^!/,'').split('\n').forEach((l,k)=>{if(k)p.append(el('br'));p.append(document.createTextNode(l))});w.append(p)})}
+ s.append(w);s.style.opacity=1}
+document.getElementById('pv').onclick=()=>go(i-1);
+document.getElementById('nx').onclick=()=>go(i+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
+let x0=null,y0=0;
+document.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
+ if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)go(i+(dx<0?1:-1))});
+const P=document.getElementById('p');
+for(let k=0;k<16;k++){const e=el('span');e.style.left=Math.random()*100+'%';e.style.animationDuration=9+Math.random()*9+'s';e.style.animationDelay=-Math.random()*12+'s';P.append(e)}
+render();
+</script>
+</body></html>
